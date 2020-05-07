@@ -11,20 +11,37 @@
  */
 
 
-package com.mendix.model;
+package com.mendix.dbModel;
 
-import javax.persistence.Id;
-
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Category
  */
+@Entity
+@Table(name = "categories")
 public class Category {
 
-  private int id ;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id ;
 
   private String categoryName = null;
+
+
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  @JoinTable(
+          name = "categories_recipes",
+          joinColumns =
+          @JoinColumn(name = "category_id", referencedColumnName = "id"),
+          inverseJoinColumns =
+          @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+  )
+  private Set<Recipe> recipes= new HashSet<>();
+
+
 
   public Category id(int id) {
     this.id = id;
@@ -35,7 +52,7 @@ public class Category {
    * Get id
    * @return id
   **/
-  public int getId() {
+  public long getId() {
     return id;
   }
 

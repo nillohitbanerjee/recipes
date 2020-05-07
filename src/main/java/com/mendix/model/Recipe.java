@@ -13,12 +13,20 @@
 
 package com.mendix.model;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Objects;
 
 /**
  * Recipe
  */
+
+
 public class Recipe {
+
+
+  private String id =null;
+
   private Directions directions = null;
 
   private RecipeHead head = null;
@@ -27,6 +35,24 @@ public class Recipe {
 
   public Recipe directions(Directions directions) {
     this.directions = directions;
+    return this;
+  }
+
+
+  /**
+   * Get directions
+   * @return directions
+   **/
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Recipe id(String id) {
+    this.id = id;
     return this;
   }
 
