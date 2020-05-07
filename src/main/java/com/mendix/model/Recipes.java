@@ -67,7 +67,7 @@ public class Recipes {
 
   public Recipes addRecipesItem(Recipe recipesItem) {
     if (this.recipes == null) {
-      this.recipes = new ArrayList<Recipe>();
+      this.recipes = new ArrayList<>();
     }
     this.recipes.add(recipesItem);
     return this;

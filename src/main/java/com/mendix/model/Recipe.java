@@ -13,8 +13,6 @@
 
 package com.mendix.model;
 
-import org.springframework.data.annotation.Id;
-
 import java.util.Objects;
 
 /**

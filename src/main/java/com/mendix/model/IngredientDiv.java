@@ -31,7 +31,7 @@ public class IngredientDiv {
 
   public IngredientDiv addIngItem(Ingredient ingItem) {
     if (this.ing == null) {
-      this.ing = new ArrayList<Ingredient>();
+      this.ing = new ArrayList<>();
     }
     this.ing.add(ingItem);
     return this;

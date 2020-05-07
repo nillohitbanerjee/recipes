@@ -49,7 +49,7 @@ public class Categories {
 
   public Categories addCategoriesItem(Category categoriesItem) {
     if (this.categories == null) {
-      this.categories = new ArrayList<Category>();
+      this.categories = new ArrayList<>();
     }
     this.categories.add(categoriesItem);
     return this;

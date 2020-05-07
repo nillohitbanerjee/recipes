@@ -13,10 +13,6 @@
 
 package com.mendix.model;
 
-import javax.persistence.Id;
-
-import javax.persistence.Entity;
-
 /**
  * Category
  */

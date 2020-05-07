@@ -30,7 +30,7 @@ public class Ingredients {
 
   public Ingredients addIngdivItem(IngredientDiv ingdivItem) {
     if (this.ingdiv == null) {
-      this.ingdiv = new ArrayList<IngredientDiv>();
+      this.ingdiv = new ArrayList<>();
     }
     this.ingdiv.add(ingdivItem);
     return this;

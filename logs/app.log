@@ -220,3 +220,26 @@ Caused by: org.springframework.boot.web.embedded.tomcat.ConnectorStartFailedExce
 2020-05-07 19:52:59,694 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-8] RecipesRestController saveData- {} call started
 2020-05-07 19:52:59,857 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-5] RecipesRestController saveData- {} call started
 2020-05-07 19:53:18,791 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-9] RecipesRestController getData- {} call started
+2020-05-07 22:15:10,578 INFO com.mendix.app.App [main] Starting App on LAPTOP-LQ9S5NJ0 with PID 14548 (C:\Users\nillo\Desktop\recipes\target\classes started by nillo in C:\Users\nillo\Desktop\recipes)
+2020-05-07 22:15:10,580 DEBUG com.mendix.app.App [main] Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2020-05-07 22:15:10,581 INFO com.mendix.app.App [main] No active profile set, falling back to default profiles: default
+2020-05-07 22:15:16,302 INFO com.mendix.app.App [main] Started App in 6.026 seconds (JVM running for 6.567)
+2020-05-07 22:15:57,496 INFO com.mendix.app.App [main] Starting App on LAPTOP-LQ9S5NJ0 with PID 22440 (C:\Users\nillo\Desktop\recipes\target\classes started by nillo in C:\Users\nillo\Desktop\recipes)
+2020-05-07 22:15:57,499 DEBUG com.mendix.app.App [main] Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2020-05-07 22:15:57,499 INFO com.mendix.app.App [main] No active profile set, falling back to default profiles: default
+2020-05-07 22:16:03,387 INFO com.mendix.app.App [main] Started App in 6.181 seconds (JVM running for 6.733)
+2020-05-07 22:16:30,414 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-7] RecipesRestController saveData- {} call started
+2020-05-07 22:17:05,757 INFO com.mendix.app.App [main] Starting App on LAPTOP-LQ9S5NJ0 with PID 6608 (C:\Users\nillo\Desktop\recipes\target\classes started by nillo in C:\Users\nillo\Desktop\recipes)
+2020-05-07 22:17:05,759 DEBUG com.mendix.app.App [main] Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2020-05-07 22:17:05,760 INFO com.mendix.app.App [main] No active profile set, falling back to default profiles: default
+2020-05-07 22:17:11,454 INFO com.mendix.app.App [main] Started App in 6.005 seconds (JVM running for 6.592)
+2020-05-07 22:18:04,670 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-5] RecipesRestController saveData- {} call started
+2020-05-07 22:18:40,789 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-8] RecipesRestController getData- {} call started
+2020-05-07 22:18:44,224 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-10] RecipesRestController getData- {} call started
+2020-05-07 22:19:09,134 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-1] RecipesRestController getData- {} call started
+2020-05-07 22:20:00,780 INFO com.mendix.app.App [main] Starting App on LAPTOP-LQ9S5NJ0 with PID 2132 (C:\Users\nillo\Desktop\recipes\target\classes started by nillo in C:\Users\nillo\Desktop\recipes)
+2020-05-07 22:20:00,783 DEBUG com.mendix.app.App [main] Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2020-05-07 22:20:00,783 INFO com.mendix.app.App [main] No active profile set, falling back to default profiles: default
+2020-05-07 22:20:06,259 INFO com.mendix.app.App [main] Started App in 5.754 seconds (JVM running for 6.334)
+2020-05-07 22:20:11,850 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-4] RecipesRestController getData- {} call started
+2020-05-07 22:20:22,552 DEBUG com.mendix.restcontroller.RecipesRestController [http-nio-10090-exec-2] RecipesRestController getData- {} call started

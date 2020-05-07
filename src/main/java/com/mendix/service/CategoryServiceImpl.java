@@ -5,9 +5,7 @@ import com.mendix.dbModel.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -17,8 +15,12 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryDao categoryDao;
 
     @Override
-    public Category findById(String id) {
-        return categoryDao.findById(id);
+    public Map<Long,String> findById(String id) {
+
+        Map<Long,String> stringList = new HashMap<>();
+        Category category = categoryDao.findById(id);
+        stringList.put(category.getId(),category.getCategoryName());
+        return stringList;
     }
 
     @Override
@@ -32,5 +34,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void saveCategory(String category) {
         categoryDao.saveCategory(category);
+    }
+
+    @Override
+    public Map<Long,String> findByName(String categoryName) {
+        Map<Long,String> stringList = new HashMap<>();
+        Category category = categoryDao.findByName(categoryName);
+        stringList.put(category.getId(),category.getCategoryName());
+        return stringList;
     }
 }

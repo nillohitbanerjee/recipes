@@ -1,9 +1,13 @@
 package com.mendix.restcontroller;
 
 import com.mendix.service.CategoryService;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -12,21 +16,39 @@ import java.util.Map;
 @RestController
 public class RecipesRestController {
 
-    private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(RecipesRestController.class);
+    private static final Logger LOGGER =  LoggerFactory.getLogger(RecipesRestController.class);
     @Autowired
     CategoryService categoryService;
     @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
-    public Map<Long,String> getData(@PathVariable("category") String category)
+    public ResponseEntity<Map<Long,String>> getData(@PathVariable("category") String category)
     {
-        LOGGER.debug("RecipesRestController getData- {} call started");
-        return categoryService.getAllCategory();
+        LOGGER.debug("RecipesRestController getData- {} call started with input:-"+category);
+        Map<Long,String> op =null;
+        if("all".equals(category))
+        op = categoryService.getAllCategory();
+
+        if(NumberUtils.isCreatable(category)){
+            op = categoryService.findById(category);
+        }
+        if(op!=null && op.size()>0){
+            return new ResponseEntity<>(op,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
-    @RequestMapping(path = "/services/recipe/", method= RequestMethod.POST)
-    public void saveData(@RequestBody String category)
+    @RequestMapping(path = "/services/recipe/category", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> saveData(@RequestBody String category)
     {
-        LOGGER.debug("RecipesRestController saveData- {} call started");
-        categoryService.saveCategory(category);
+        LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+category);
+        if(!StringUtils.isEmpty(category)) {
+            categoryService.saveCategory(category);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     //inner class
 
