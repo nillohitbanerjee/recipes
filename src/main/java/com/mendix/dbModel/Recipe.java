@@ -31,9 +31,19 @@ public class Recipe {
 
   private String name;
 
+  @Lob
+  @Column(name="CONTENT", length=2048)
   private String recipeJson;
 
-  @ManyToMany(mappedBy = "recipes", fetch = FetchType.LAZY)
+
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  @JoinTable(
+          name = "categories_recipes",
+          joinColumns =
+          @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
+          inverseJoinColumns =
+          @JoinColumn(name = "category_id", referencedColumnName = "id")
+  )
   private Set<Category> categories= new HashSet<>();
 
   public Long getId() {

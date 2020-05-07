@@ -28,17 +28,10 @@ public class Category {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id ;
 
-  private String categoryName = null;
+  private String categoryName ;
 
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-  @JoinTable(
-          name = "categories_recipes",
-          joinColumns =
-          @JoinColumn(name = "category_id", referencedColumnName = "id"),
-          inverseJoinColumns =
-          @JoinColumn(name = "recipe_id", referencedColumnName = "id")
-  )
+  @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
   private Set<Recipe> recipes= new HashSet<>();
 
 

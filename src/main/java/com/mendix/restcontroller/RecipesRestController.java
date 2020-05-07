@@ -1,6 +1,8 @@
 package com.mendix.restcontroller;
 
+import com.mendix.model.Recipe;
 import com.mendix.service.CategoryService;
+import com.mendix.service.RecipeService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,10 @@ public class RecipesRestController {
     private static final Logger LOGGER =  LoggerFactory.getLogger(RecipesRestController.class);
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    RecipeService recipeService;
+
     @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
     public ResponseEntity<Map<Long,String>> getData(@PathVariable("category") String category)
     {
@@ -39,7 +45,6 @@ public class RecipesRestController {
     }
 
     @RequestMapping(path = "/services/recipe/category", method= RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> saveData(@RequestBody String category)
     {
         LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+category);
@@ -50,6 +55,24 @@ public class RecipesRestController {
         else
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    //inner class
+
+
+    @RequestMapping(path = "/services/recipe/add", method= RequestMethod.PUT)
+    public ResponseEntity<?> addRecipe(@RequestBody Recipe recipe)
+    {
+        LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+recipe.toString());
+        if(recipeService.validateRecipeRequest(recipe)) {
+            if(!recipeService.isDelicateRecipe(recipe)) {
+                recipeService.saveRecipe(recipe);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
+        else
+            return new ResponseEntity<>("Json structure is right but value is wrong",HttpStatus.BAD_REQUEST);
+    }
+
 
 }

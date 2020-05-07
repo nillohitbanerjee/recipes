@@ -2,7 +2,7 @@ package com.mendix.dao;
 
 import com.mendix.dbModel.Category;
 
- interface CategoryDao {
+ public interface CategoryDao {
 
      Category findById(String id) ;
      Iterable<Category> getAllCategory();

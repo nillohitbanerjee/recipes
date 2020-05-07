@@ -2,7 +2,7 @@ package com.mendix.service;
 
 import java.util.Map;
 
- interface CategoryService {
+public interface CategoryService {
 
      Map<Long,String> findById(String id) ;
      Map<Long,String> getAllCategory();

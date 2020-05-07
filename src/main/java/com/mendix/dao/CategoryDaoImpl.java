@@ -18,7 +18,7 @@ public class CategoryDaoImpl implements  CategoryDao {
 
     @Override
     public Category findByName(String categoryName) {
-        return categoryRepository.findByCategoryName(categoryName);
+        return categoryRepository.findByCategoryName(categoryName).get(0);
     }
 
     @Override
