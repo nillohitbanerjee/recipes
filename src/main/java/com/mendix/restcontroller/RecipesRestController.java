@@ -44,9 +44,11 @@ public class RecipesRestController {
         if(op!=null && op.size()>0){
             categoryOP.setResults((op.size()));
             categoryOP.setCategories(op);
+            LOGGER.debug("RecipesRestController getData- {} call end with success");
             return new ResponseEntity<>(categoryOP,HttpStatus.OK);
         }
         else{
+            LOGGER.debug("RecipesRestController getData- {} call end with failure");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -58,14 +60,18 @@ public class RecipesRestController {
         if(!StringUtils.isEmpty(category)) {
             if(!categoryService.isDuplicateCategory(category)) {
                 categoryService.saveCategory(category);
+                LOGGER.debug("RecipesRestController saveData- {} call end with success and created");
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             else{
+                LOGGER.debug("RecipesRestController saveData- {} call end with conflict");
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
-        else
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        else {
+            LOGGER.debug("RecipesRestController saveData- {} call end with failure");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 
@@ -76,14 +82,18 @@ public class RecipesRestController {
         if(recipeService.validateRecipeRequest(recipe)) {
             if(!recipeService.isDelicateRecipe(recipe)) {
                 recipeService.saveRecipe(recipe);
+                LOGGER.debug("RecipesRestController addRecipe- {} call end with success and created");
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             else{
+                LOGGER.debug("RecipesRestController addRecipe- {} call end with conflict");
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
-        else
-            return new ResponseEntity<>("Json structure is right but value is wrong",HttpStatus.BAD_REQUEST);
+        else {
+            LOGGER.debug("RecipesRestController addRecipe- {} call end with failure");
+            return new ResponseEntity<>("Json structure is right but value is wrong", HttpStatus.BAD_REQUEST);
+        }
     }
 
 
@@ -107,10 +117,11 @@ public class RecipesRestController {
             }
         }
         if(op!=null){
-
+            LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
             return new ResponseEntity<>(op,HttpStatus.OK);
         }
         else{
+            LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
