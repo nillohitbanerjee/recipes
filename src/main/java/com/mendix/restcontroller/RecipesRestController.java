@@ -1,6 +1,5 @@
 package com.mendix.restcontroller;
 
-import com.mendix.dbModel.Category;
 import com.mendix.model.Recipe;
 import com.mendix.model.Recipes;
 import com.mendix.service.CategoryService;
@@ -73,7 +72,7 @@ public class RecipesRestController {
     @RequestMapping(path = "/services/recipe/add", method= RequestMethod.PUT)
     public ResponseEntity<?> addRecipe(@RequestBody Recipe recipe)
     {
-        LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+recipe.toString());
+        LOGGER.debug("RecipesRestController addRecipe- {} call started with input :-"+recipe.toString());
         if(recipeService.validateRecipeRequest(recipe)) {
             if(!recipeService.isDelicateRecipe(recipe)) {
                 recipeService.saveRecipe(recipe);
@@ -91,7 +90,7 @@ public class RecipesRestController {
     @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
     public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category)
     {
-        LOGGER.debug("RecipesRestController getData- {} call started with input:-");
+        LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
         Recipes op =null;
 
         if("all".equals(category))

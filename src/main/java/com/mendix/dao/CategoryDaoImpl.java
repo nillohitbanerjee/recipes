@@ -31,6 +31,7 @@ public class CategoryDaoImpl implements  CategoryDao {
     public Category findById(String id) {
 
         return categoryRepository.findById(Long.parseLong(id)).get();
+
     }
 
     @Override

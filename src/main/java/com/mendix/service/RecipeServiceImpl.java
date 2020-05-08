@@ -104,25 +104,7 @@ public class RecipeServiceImpl implements RecipeService {
         Recipes recipes = new Recipes();
         List<Recipe> recipesList = new ArrayList<>();
 
-        try {
-            recipeDao.getAllRecipes().forEach(recipe -> {
-                try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
-                    obj.setId(recipe.getId()+"");
-                    recipesList.add(obj);
-                }
-                catch (Exception ex){
-                    ex.printStackTrace();
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        recipes.setRecipes(recipesList);
-        recipes.setResults(Long.valueOf(recipesList.size()));
-        recipes.setTotal(recipeDao.findCountForAllRecipe());
+        prepapreRecipes(recipes, recipesList, recipeDao.getAllRecipes());
         return recipes;
     }
 
@@ -131,26 +113,29 @@ public class RecipeServiceImpl implements RecipeService {
 
         Recipes recipes = new Recipes();
         List<Recipe> recipesList = new ArrayList<>();
-try{
-        recipeDao.findAllRecipeForACategory(categoryId).forEach(recipe -> {
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
-                obj.setId(recipe.getId()+"");
-                recipesList.add(obj);
-            }
-            catch (Exception ex){
-                ex.printStackTrace();
-            }
-        });
-    }catch (Exception e){
-        e.printStackTrace();
+        prepapreRecipes(recipes, recipesList, recipeDao.findAllRecipeForACategory(categoryId));
+
+        return recipes;
     }
+
+    private void prepapreRecipes(Recipes recipes, List<Recipe> recipesList, Iterable<com.mendix.dbModel.Recipe> allRecipeForACategory) {
+        try {
+            allRecipeForACategory.forEach(recipe -> {
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
+                    obj.setId(recipe.getId() + "");
+                    recipesList.add(obj);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         recipes.setRecipes(recipesList);
         recipes.setResults(Long.valueOf(recipesList.size()));
         recipes.setTotal(recipeDao.findCountForAllRecipe());
-
-        return recipes;
     }
 }
