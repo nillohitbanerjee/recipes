@@ -43,4 +43,13 @@ public class CategoryServiceImpl implements CategoryService {
         stringList.put(category.getId(),category.getCategoryName());
         return stringList;
     }
+
+    @Override
+    public boolean isDuplicateCategory(String categoryName) {
+        Category category = categoryDao.findByName(categoryName);
+        if(category==null)
+        return false;
+        else
+            return  true;
+    }
 }

@@ -56,8 +56,13 @@ public class RecipesRestController {
     {
         LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+category);
         if(!StringUtils.isEmpty(category)) {
-            categoryService.saveCategory(category);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            if(!categoryService.isDuplicateCategory(category)) {
+                categoryService.saveCategory(category);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
         }
         else
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -8,4 +8,5 @@ public interface CategoryService {
      Map<Long,String> getAllCategory();
      void saveCategory(String category);
      Map<Long,String> findByName(String categoryName) ;
+     boolean isDuplicateCategory(String category);
 }
