@@ -1,0 +1,536 @@
+{
+	"info": {
+		"_postman_id": "0d30fee6-ae67-4eaf-b61e-4755fc8cbcd9",
+		"name": "recipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create category",
+			"item": [
+				{
+					"name": "cake mixes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9813be40-74c9-4280-bd65-36a67afd3123",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "cake mixes"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "chili",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfc0dacd-2888-464c-a192-b777f5b6a351",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "chili"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "main dish",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "894c1972-fd0a-468e-80dc-e4c680187e2f",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "main dish"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "cakes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e9fbe2f-cec4-4cbb-9b6e-b570a3b46364",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "cakes"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "liquor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "984731df-53fb-46e8-8b2e-f96510c315dc",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "liquor"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "vegetables",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "98bb07b6-2ca4-4e7f-b62b-64b3c2235944",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "vegetables"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "microwave",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "489e83ac-b54a-498e-b215-fb985325cf85",
+								"exec": [
+									"pm.test(\"create category and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "microwave"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				},
+				{
+					"name": "Dupilcate entry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "deb0774d-7b6b-4292-9f73-38beca3ad6a7",
+								"exec": [
+									"pm.test(\"create category to check conflict\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "microwave"
+						},
+						"url": "{{backendUrl}}/services/recipe/category",
+						"description": "create category chili"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "get categories",
+			"item": [
+				{
+					"name": "get all categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "edd6443e-4c8b-4098-8399-e14e906cfea4",
+								"exec": [
+									"pm.test(\"get category and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/filter/all"
+					},
+					"response": []
+				},
+				{
+					"name": "get a category by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b48dabb1-61bb-49ff-b4ad-25a6416a4677",
+								"exec": [
+									"pm.test(\"get category and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/filter/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get a category by name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "37ed952f-2ddb-408c-ab9c-807c4e47728e",
+								"exec": [
+									"pm.test(\"get category and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/filter/chili"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "create recipe",
+			"item": [
+				{
+					"name": "create one recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c92858df-32a2-4ec3-afe6-41142bb4afc0",
+								"exec": [
+									"pm.test(\"create recipe and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"head\": {\r\n    \"title\": \"Amaretto Cake\",\r\n    \"categories\": {\r\n      \"cat\": [\r\n        {\r\n          \"categoryName\": \"liquor\",\r\n          \"id\": 0\r\n        },\r\n        {\r\n          \"categoryName\": \"cakes\",\r\n          \"id\": 0\r\n        },\r\n        {\r\n          \"categoryName\": \"cake mixes\",\r\n          \"id\": 0\r\n        }\r\n        \r\n      ]\r\n    },\r\n    \"yield\": \"1\"\r\n  },\r\n  \"ingredients\": {\r\n    \"ingdiv\": [\r\n      {\r\n        \"title\": \"\",\r\n        \"ing\": [\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1 1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Toasted Almonds; chopped\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"package\"\r\n            },\r\n            \"item\": \"Yellow cake mix; no pudding\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"package\"\r\n            },\r\n            \"item\": \"Vanilla instant pudding\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"4\",\r\n              \"unit\": \"\"\r\n            },\r\n            \"item\": \"Eggs\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Vegetable oil\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Water\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Amaretto\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"teaspoon\"\r\n            },\r\n            \"item\": \"Almond extract\"\r\n          }\r\n        ]\r\n      },\r\n      {\r\n        \"title\": \"GLAZE\",\r\n        \"ing\": [\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Sugar\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/4\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Water\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"2\",\r\n              \"unit\": \"tablespoons\"\r\n            },\r\n            \"item\": \"Butter\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/4\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Amaretto\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"teaspoons\"\r\n            },\r\n            \"item\": \"Almond extract\"\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  },\r\n  \"directions\": {\r\n    \"step\": \"  Sprinkle 1 cup almonds into bottom of a well-greased       and floured 10\\\"\\n  tube pan; set aside. Combine cake mix,     pudding mix, eggs, oil, water,\\n  amaretto, and almond        extract in a mixing bowl; beat on low speed of\\n  an\\n         electric mixer til dry ingredients are moistened.          Increase\\n  speed to medium, and beat 4 minutes. Stir in      remaining 1\\/2 cup\\n  almonds. Pour batter into prepared       tube pan. Bake at 325~ for 1 hour\\n  or til a wooden pick inserted in center comes out clean. Cool cake in pan\\n    10-15 minutes; remove from pan, and cool completely.       Combine sugar,\\n  water, and butter in a small saucepan;      bring to a boil. Reduce heat to\\n  medium and gently boil     4-5 minutes, stirring occasionally, until sugar\\n  dissolves. Remove from heat, and cool 15 minutes. Stir\\n  in amaretto and almond extract. Punch holes in top of      cake with a\\n  wooden pick; slowly spoon glaze on top of cake, allowing glaze to absorb in\\n  cake.\\n  Posted to MC-Recipe Digest V1 #263\\n  \\n  Date: Sun, 27 Oct 1996 20:04:57 +0000\\n  \\n  From: Cheryl Gimenez <clgimenez@earthlink.net>\\n \\n\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{backendUrl}}/services/recipe/add"
+					},
+					"response": []
+				},
+				{
+					"name": "conflict test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "36cde652-0ebe-41fd-85d5-16fe38f258c3",
+								"exec": [
+									"pm.test(\"create recipe conflict\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"pm.globals.set(\"variable_key\", \"variable_value\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"head\": {\r\n    \"title\": \"Amaretto Cake\",\r\n    \"categories\": {\r\n      \"cat\": [\r\n        {\r\n          \"categoryName\": \"liquor\",\r\n          \"id\": 0\r\n        },\r\n        {\r\n          \"categoryName\": \"cakes\",\r\n          \"id\": 0\r\n        },\r\n        {\r\n          \"categoryName\": \"cake mixes\",\r\n          \"id\": 0\r\n        }\r\n        \r\n      ]\r\n    },\r\n    \"yield\": \"1\"\r\n  },\r\n  \"ingredients\": {\r\n    \"ingdiv\": [\r\n      {\r\n        \"title\": \"\",\r\n        \"ing\": [\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1 1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Toasted Almonds; chopped\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"package\"\r\n            },\r\n            \"item\": \"Yellow cake mix; no pudding\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"package\"\r\n            },\r\n            \"item\": \"Vanilla instant pudding\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"4\",\r\n              \"unit\": \"\"\r\n            },\r\n            \"item\": \"Eggs\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Vegetable oil\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Water\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Amaretto\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"teaspoon\"\r\n            },\r\n            \"item\": \"Almond extract\"\r\n          }\r\n        ]\r\n      },\r\n      {\r\n        \"title\": \"GLAZE\",\r\n        \"ing\": [\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Sugar\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/4\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Water\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"2\",\r\n              \"unit\": \"tablespoons\"\r\n            },\r\n            \"item\": \"Butter\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/4\",\r\n              \"unit\": \"cups\"\r\n            },\r\n            \"item\": \"Amaretto\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\\/2\",\r\n              \"unit\": \"teaspoons\"\r\n            },\r\n            \"item\": \"Almond extract\"\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  },\r\n  \"directions\": {\r\n    \"step\": \"  Sprinkle 1 cup almonds into bottom of a well-greased       and floured 10\\\"\\n  tube pan; set aside. Combine cake mix,     pudding mix, eggs, oil, water,\\n  amaretto, and almond        extract in a mixing bowl; beat on low speed of\\n  an\\n         electric mixer til dry ingredients are moistened.          Increase\\n  speed to medium, and beat 4 minutes. Stir in      remaining 1\\/2 cup\\n  almonds. Pour batter into prepared       tube pan. Bake at 325~ for 1 hour\\n  or til a wooden pick inserted in center comes out clean. Cool cake in pan\\n    10-15 minutes; remove from pan, and cool completely.       Combine sugar,\\n  water, and butter in a small saucepan;      bring to a boil. Reduce heat to\\n  medium and gently boil     4-5 minutes, stirring occasionally, until sugar\\n  dissolves. Remove from heat, and cool 15 minutes. Stir\\n  in amaretto and almond extract. Punch holes in top of      cake with a\\n  wooden pick; slowly spoon glaze on top of cake, allowing glaze to absorb in\\n  cake.\\n  Posted to MC-Recipe Digest V1 #263\\n  \\n  Date: Sun, 27 Oct 1996 20:04:57 +0000\\n  \\n  From: Cheryl Gimenez <clgimenez@earthlink.net>\\n \\n\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{backendUrl}}/services/recipe/add"
+					},
+					"response": []
+				},
+				{
+					"name": "create 2 nd recipes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a5f49dd5-bf8e-4f11-9c7a-95a7c75d5b33",
+								"exec": [
+									"pm.test(\"create recipe and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"head\": {\r\n        \"title\": \"30 Minute Chili\",\r\n        \"categories\": {\r\n          \"cat\": [\r\n {\r\n          \"categoryName\": \"chili\",\r\n          \"id\": 0\r\n        },\r\n        {\r\n          \"categoryName\": \"main dish\",\r\n          \"id\": 0\r\n        }\r\n          ]\r\n        },\r\n        \"yield\": \"6\"\r\n      },\r\n      \"ingredients\": {\r\n\t  \"ingdiv\": [\r\n      {\r\n        \"title\": \"\",\r\n        \"ing\": [\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"pound\"\r\n            },\r\n            \"item\": \"Ground chuck or lean ground; beef\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"\"\r\n            },\r\n            \"item\": \"Onion; large, chopped\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"can\"\r\n            },\r\n            \"item\": \"Kidney beans; (12 oz)\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"can\"\r\n            },\r\n            \"item\": \"Tomato soup; undiluted\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"teaspoon\"\r\n            },\r\n            \"item\": \"Salt\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"tablespoon\"\r\n            },\r\n            \"item\": \"Chili powder; (or to taste)\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"\",\r\n              \"unit\": \"\"\r\n            },\r\n            \"item\": \"Hot pepper sauce; to taste\"\r\n          }\r\n        ]\r\n      }]},\r\n      \"directions\": {\r\n        \"step\": \"  Brown the meat in a little butter and cook until the meat is brown -- about\\n  10 minutes. Add all other ingredients and let simmer for 30 minutes. Your\\n  choice of hot sauce may be added to taste.\\n  \\n  Recipe by: MasterCook Archives\\n  \\n  Posted to recipelu-digest Volume 01 Number 577 by Rodeo46898\\n  <Rodeo46898@aol.com> on Jan 22, 1998\\n \\n\"\r\n      }\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{backendUrl}}/services/recipe/add"
+					},
+					"response": []
+				},
+				{
+					"name": "create 3 nd recipes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "058cfc62-7b0e-434f-8394-c3d40c923b30",
+								"exec": [
+									"pm.test(\"create recipe and reponse code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"head\": {\r\n        \"title\": \"40 Minute special\",\r\n        \"categories\": {\r\n          \"cat\": [\r\n\r\n        {\r\n          \"categoryName\": \"chili\",\r\n          \"id\": 0\r\n        }\r\n          ]\r\n        },\r\n        \"yield\": \"6\"\r\n      },\r\n      \"ingredients\": {\r\n      \t\"ingdiv\": [\r\n      {\r\n        \"title\": \"\",\r\n        \"ing\": [\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"pound\"\r\n            },\r\n            \"item\": \"Ground chuck or lean ground; beef\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"\"\r\n            },\r\n            \"item\": \"Onion; large, chopped\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"can\"\r\n            },\r\n            \"item\": \"Kidney beans; (12 oz)\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"can\"\r\n            },\r\n            \"item\": \"Tomato soup; undiluted\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"teaspoon\"\r\n            },\r\n            \"item\": \"Salt\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"1\",\r\n              \"unit\": \"tablespoon\"\r\n            },\r\n            \"item\": \"Chili powder; (or to taste)\"\r\n          },\r\n          {\r\n            \"amt\": {\r\n              \"qty\": \"\",\r\n              \"unit\": \"\"\r\n            },\r\n            \"item\": \"Hot pepper sauce; to taste\"\r\n          }\r\n        ]\r\n      }]},\r\n      \"directions\": {\r\n        \"step\": \"  Brown the meat in a little butter and cook until the meat is brown -- about\\n  10 minutes. Add all other ingredients and let simmer for 30 minutes. Your\\n  choice of hot sauce may be added to taste.\\n  \\n  Recipe by: MasterCook Archives\\n  \\n  Posted to recipelu-digest Volume 01 Number 577 by Rodeo46898\\n  <Rodeo46898@aol.com> on Jan 22, 1998\\n \\n\"\r\n      }\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{backendUrl}}/services/recipe/add"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "get recipe",
+			"item": [
+				{
+					"name": "get all recipes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d1aa23b-918d-4e4d-ae14-562ee74f0402",
+								"exec": [
+									"pm.test(\"get recipe and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/all"
+					},
+					"response": []
+				},
+				{
+					"name": "get all recipes of specific category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2fb9373a-075b-4387-a08c-c2ac2b4719f4",
+								"exec": [
+									"pm.test(\"get recipy and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/chili"
+					},
+					"response": []
+				},
+				{
+					"name": "no recipes found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "43ab7d11-b8d1-431a-b34e-576cce1d798c",
+								"exec": [
+									"pm.test(\"no recipe found and reponse code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/test"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

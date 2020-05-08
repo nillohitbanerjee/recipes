@@ -14,7 +14,6 @@
 package com.mendix.model;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,14 +22,22 @@ import java.util.List;
 public class Categories {
   private Long results = null;
 
-  private List<Category> categories = null;
+  private List<Category> cat = null;
 
   public Categories results(Long results) {
     this.results = results;
     return this;
   }
 
-   /**
+  public List<Category> getCat() {
+    return cat;
+  }
+
+  public void setCat(List<Category> cat) {
+    this.cat = cat;
+  }
+
+  /**
    * Get results
    * @return results
   **/
@@ -42,30 +49,6 @@ public class Categories {
     this.results = results;
   }
 
-  public Categories categories(List<Category> categories) {
-    this.categories = categories;
-    return this;
-  }
-
-  public Categories addCategoriesItem(Category categoriesItem) {
-    if (this.categories == null) {
-      this.categories = new ArrayList<>();
-    }
-    this.categories.add(categoriesItem);
-    return this;
-  }
-
-   /**
-   * Get categories
-   * @return categories
-  **/
-  public List<Category> getCategories() {
-    return categories;
-  }
-
-  public void setCategories(List<Category> categories) {
-    this.categories = categories;
-  }
 
 
 
@@ -75,7 +58,7 @@ public class Categories {
     sb.append("class Categories {\n");
     
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
-    sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
+    sb.append("    categories: ").append(toIndentedString(cat)).append("\n");
     sb.append("}");
     return sb.toString();
   }

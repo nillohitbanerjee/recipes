@@ -32,13 +32,18 @@ public class RecipeServiceImpl implements RecipeService {
 
                 Categories categories = recipe.getHead().getCategories();
 
-                if(categories!=null && categories.getCategories()!=null && categories.getCategories().size()>0){
+                if(categories!=null && categories.getCat()!=null && categories.getCat().size()>0){
 
-                    List<Category> categoryInputList = categories.getCategories();
+                    List<Category> categoryInputList = categories.getCat();
 
                     List<com.mendix.dbModel.Category> categoryDBList = new ArrayList<>();
 
-                    categoryInputList.forEach(c->categoryDBList.add(categoryDao.findByName(c.getCategoryName())));
+                    categoryInputList.forEach(
+                            c->{
+                                com.mendix.dbModel.Category category = categoryDao.findByName(c.getCategoryName());
+                                if(category!=null)
+                                categoryDBList.add(category);}
+                    );
 
 
                     if(categoryInputList.size()==categoryDBList.size()){
@@ -67,7 +72,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         try {
             Categories categories = recipe.getHead().getCategories();
-            List<Category> categoryInputList = categories.getCategories();
+            List<Category> categoryInputList = categories.getCat();
 
             Set<com.mendix.dbModel.Category> categoryDBList = new HashSet<>();
 
@@ -104,6 +109,7 @@ public class RecipeServiceImpl implements RecipeService {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
                     Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
+                    obj.setId(recipe.getId()+"");
                     recipesList.add(obj);
                 }
                 catch (Exception ex){
@@ -117,6 +123,34 @@ public class RecipeServiceImpl implements RecipeService {
         recipes.setRecipes(recipesList);
         recipes.setResults(Long.valueOf(recipesList.size()));
         recipes.setTotal(recipeDao.findCountForAllRecipe());
+        return recipes;
+    }
+
+    @Override
+    public Recipes getAllRecipesForACategory(Long categoryId) {
+
+        Recipes recipes = new Recipes();
+        List<Recipe> recipesList = new ArrayList<>();
+try{
+        recipeDao.findAllRecipeForACategory(categoryId).forEach(recipe -> {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
+                obj.setId(recipe.getId()+"");
+                recipesList.add(obj);
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
+        });
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+
+        recipes.setRecipes(recipesList);
+        recipes.setResults(Long.valueOf(recipesList.size()));
+        recipes.setTotal(recipeDao.findCountForAllRecipe());
+
         return recipes;
     }
 }

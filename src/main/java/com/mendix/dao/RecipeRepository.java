@@ -13,10 +13,10 @@ import java.util.Collection;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Recipe findByName(String name);
 
-    @Query(value ="SELECT r FROM Recipe r , categories_recipes cr WHERE r.id = cr.category_id and cr.category_id=?1",nativeQuery = true)
+    @Query(value ="SELECT * FROM recipes r  WHERE r.id  in  (select RECIPE_ID from categories_recipes where category_id=?1)",nativeQuery = true)
     Collection<Recipe> findAllRecipeForACategory(@Param("categoryId")long categoryId);
 
-    @Query(value="SELECT count(r) FROM Recipe r , categories_recipes cr WHERE r.id = cr.category_id and cr.category_id=?1",nativeQuery = true)
+    @Query(value="SELECT count(*) FROM recipes r  WHERE r.id  in  (select RECIPE_ID from categories_recipes where category_id=?1)",nativeQuery = true)
     long findCountForAllRecipeForACategory(@Param("categoryId") long categoryId);
 
     @Query(value ="SELECT count(r) FROM Recipe r")

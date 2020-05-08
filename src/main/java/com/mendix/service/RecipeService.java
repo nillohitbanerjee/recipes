@@ -9,4 +9,5 @@ public interface RecipeService {
     boolean isDelicateRecipe(Recipe recipe);
     boolean saveRecipe(Recipe recipe);
     Recipes getAllRecipe();
+    Recipes getAllRecipesForACategory(Long categoryId);
 }

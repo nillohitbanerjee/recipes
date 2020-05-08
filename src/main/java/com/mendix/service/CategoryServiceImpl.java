@@ -19,8 +19,12 @@ public class CategoryServiceImpl implements CategoryService {
 
         Map<Long,String> stringList = new HashMap<>();
         Category category = categoryDao.findById(id);
-        stringList.put(category.getId(),category.getCategoryName());
-        return stringList;
+        if(category!=null) {
+            stringList.put(category.getId(), category.getCategoryName());
+            return stringList;
+        }
+
+            return stringList;
     }
 
     @Override
@@ -40,8 +44,10 @@ public class CategoryServiceImpl implements CategoryService {
     public Map<Long,String> findByName(String categoryName) {
         Map<Long,String> stringList = new HashMap<>();
         Category category = categoryDao.findByName(categoryName);
-        stringList.put(category.getId(),category.getCategoryName());
-        return stringList;
+        if(category!=null) {
+            stringList.put(category.getId(), category.getCategoryName());
+        }
+            return stringList;
     }
 
     @Override
