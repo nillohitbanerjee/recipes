@@ -6,6 +6,7 @@ import com.mendix.dao.RecipeDao;
 import com.mendix.model.Categories;
 import com.mendix.model.Category;
 import com.mendix.model.Recipe;
+import com.mendix.model.Recipes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,5 +92,31 @@ public class RecipeServiceImpl implements RecipeService {
 
 
         return false;
+    }
+
+    @Override
+    public Recipes getAllRecipe() {
+        Recipes recipes = new Recipes();
+        List<Recipe> recipesList = new ArrayList<>();
+
+        try {
+            recipeDao.getAllRecipes().forEach(recipe -> {
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
+                    recipesList.add(obj);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        recipes.setRecipes(recipesList);
+        recipes.setResults(Long.valueOf(recipesList.size()));
+        recipes.setTotal(recipeDao.findCountForAllRecipe());
+        return recipes;
     }
 }

@@ -1,7 +1,7 @@
 package com.mendix.restcontroller;
 
-import com.mendix.model.Categories;
 import com.mendix.model.Recipe;
+import com.mendix.model.Recipes;
 import com.mendix.service.CategoryService;
 import com.mendix.service.RecipeService;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -26,20 +26,23 @@ public class RecipesRestController {
     @Autowired
     RecipeService recipeService;
 
-    @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
-    public ResponseEntity<Categories> getData(@PathVariable("category") String category)
+    @RequestMapping(path = "/services/recipe/filter/{category}", method= RequestMethod.GET)
+    public ResponseEntity<CategoriesOp> getData(@PathVariable("category") String category)
     {
         LOGGER.debug("RecipesRestController getData- {} call started with input:-"+category);
         Map<Long,String> op =null;
-        Categories categoryOP = new Categories();
+        CategoriesOp categoryOP = new CategoriesOp();
         if("all".equals(category))
         op = categoryService.getAllCategory();
-
-        if(NumberUtils.isCreatable(category)){
-            op = categoryService.findById(category);
+        else {
+            if (NumberUtils.isCreatable(category)) {
+                op = categoryService.findById(category);
+            } else {
+                op = categoryService.findByName(category);
+            }
         }
         if(op!=null && op.size()>0){
-            categoryOP.setResults(Long.valueOf(op.size()));
+            categoryOP.setResults((op.size()));
             categoryOP.setCategories(op);
             return new ResponseEntity<>(categoryOP,HttpStatus.OK);
         }
@@ -79,4 +82,18 @@ public class RecipesRestController {
     }
 
 
+    @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
+    public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category)
+    {
+        LOGGER.debug("RecipesRestController getData- {} call started with input:-");
+        Recipes op =recipeService.getAllRecipe();
+
+        if(op!=null){
+
+            return new ResponseEntity<>(op,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 }

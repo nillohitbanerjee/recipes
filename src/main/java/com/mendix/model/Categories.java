@@ -16,14 +16,14 @@ package com.mendix.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Categories
  */
 public class Categories {
   private Long results = null;
-  private Map<Long,String> categories;
+
+  private List<Category> categories = null;
 
   public Categories results(Long results) {
     this.results = results;
@@ -42,19 +42,28 @@ public class Categories {
     this.results = results;
   }
 
+  public Categories categories(List<Category> categories) {
+    this.categories = categories;
+    return this;
+  }
 
-
-
+  public Categories addCategoriesItem(Category categoriesItem) {
+    if (this.categories == null) {
+      this.categories = new ArrayList<>();
+    }
+    this.categories.add(categoriesItem);
+    return this;
+  }
 
    /**
    * Get categories
    * @return categories
   **/
-  public Map<Long,String> getCategories() {
+  public List<Category> getCategories() {
     return categories;
   }
 
-  public void setCategories(Map<Long,String> categories) {
+  public void setCategories(List<Category> categories) {
     this.categories = categories;
   }
 
