@@ -1,9 +1,13 @@
 package com.mendix.restcontroller;
 
+import com.mendix.model.Categories;
+import com.mendix.model.Category;
 import com.mendix.model.Recipe;
 import com.mendix.model.Recipes;
 import com.mendix.service.CategoryService;
 import com.mendix.service.RecipeService;
+import io.swagger.models.auth.In;
+import javafx.scene.transform.Scale;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,11 +33,11 @@ public class RecipesRestController {
     RecipeService recipeService;
 
     @RequestMapping(path = "/services/recipe/filter/{category}", method= RequestMethod.GET)
-    public ResponseEntity<CategoriesOp> getData(@PathVariable("category") String category)
+    public ResponseEntity<Categories> getData(@PathVariable("category") String category)
     {
         LOGGER.debug("RecipesRestController getData- {} call started with input:-"+category);
         Map<Long,String> op =null;
-        CategoriesOp categoryOP = new CategoriesOp();
+        Categories categoryOP = new Categories();
         if("all".equals(category))
         op = categoryService.getAllCategory();
         else {
@@ -42,8 +48,17 @@ public class RecipesRestController {
             }
         }
         if(op!=null && op.size()>0){
-            categoryOP.setResults((op.size()));
-            categoryOP.setCategories(op);
+            categoryOP.setResults(Integer.valueOf(op.size()));
+            List<Category> cat = new ArrayList<>();
+
+            op.forEach((k,v)->{
+                Category c = new Category();
+                c.setId(Integer.valueOf(k.intValue()));
+                c.setCategoryName(v);
+                cat.add(c);
+            });
+
+            categoryOP.setCat(cat);
             LOGGER.debug("RecipesRestController getData- {} call end with success");
             return new ResponseEntity<>(categoryOP,HttpStatus.OK);
         }

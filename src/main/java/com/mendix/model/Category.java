@@ -18,11 +18,11 @@ package com.mendix.model;
  */
 public class Category {
 
-  private Long id ;
+  private int id ;
 
   private String categoryName = null;
 
-  public Category id(Long id) {
+  public Category id(int id) {
     this.id = id;
     return this;
   }
@@ -31,11 +31,11 @@ public class Category {
    * Get id
    * @return id
   **/
-  public Long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(int id) {
     this.id = id;
   }
 

@@ -20,11 +20,11 @@ import java.util.List;
  * Categories
  */
 public class Categories {
-  private Long results = null;
+  private int results ;
 
   private List<Category> cat = null;
 
-  public Categories results(Long results) {
+  public Categories results(int results) {
     this.results = results;
     return this;
   }
@@ -41,11 +41,11 @@ public class Categories {
    * Get results
    * @return results
   **/
-  public Long getResults() {
+  public int getResults() {
     return results;
   }
 
-  public void setResults(Long results) {
+  public void setResults(int results) {
     this.results = results;
   }
 
