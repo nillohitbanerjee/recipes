@@ -1,5 +1,6 @@
 package com.mendix.restcontroller;
 
+import com.mendix.model.Categories;
 import com.mendix.model.Recipe;
 import com.mendix.service.CategoryService;
 import com.mendix.service.RecipeService;
@@ -26,10 +27,11 @@ public class RecipesRestController {
     RecipeService recipeService;
 
     @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
-    public ResponseEntity<Map<Long,String>> getData(@PathVariable("category") String category)
+    public ResponseEntity<Categories> getData(@PathVariable("category") String category)
     {
         LOGGER.debug("RecipesRestController getData- {} call started with input:-"+category);
         Map<Long,String> op =null;
+        Categories categoryOP = new Categories();
         if("all".equals(category))
         op = categoryService.getAllCategory();
 
@@ -37,7 +39,9 @@ public class RecipesRestController {
             op = categoryService.findById(category);
         }
         if(op!=null && op.size()>0){
-            return new ResponseEntity<>(op,HttpStatus.OK);
+            categoryOP.setResults(Long.valueOf(op.size()));
+            categoryOP.setCategories(op);
+            return new ResponseEntity<>(categoryOP,HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
