@@ -46,7 +46,7 @@ public class RecipesRestController {
                 op = categoryService.findByName(category);
             }
         }
-        if(op!=null && op.size()>0){
+        if(op!=null && !op.isEmpty()){
             categoryOP.setResults(Integer.valueOf(op.size()));
             List<Category> cat = new ArrayList<>();
 
@@ -122,11 +122,11 @@ public class RecipesRestController {
         else {
             if (NumberUtils.isCreatable(category)) {
                 Map<Long,String>byId = categoryService.findById(category);
-                if(byId!=null && byId.size()>0)
+                if(byId!=null && !byId.isEmpty())
                 op = recipeService.getAllRecipesForACategory((Long)byId.keySet().toArray()[0]);
             } else {
                 Map<Long,String>byName= categoryService.findByName(category);
-                if(byName!=null && byName.size()>0)
+                if(byName!=null && !byName.isEmpty())
                     op = recipeService.getAllRecipesForACategory((Long)byName.keySet().toArray()[0]);
             }
         }
@@ -158,11 +158,11 @@ public class RecipesRestController {
         else {
             if (NumberUtils.isCreatable(category)) {
                 Map<Long,String>byId = categoryService.findById(category);
-                if(byId!=null && byId.size()>0)
+                if(byId!=null && !byId.isEmpty())
                     op = recipeService.getAllRecipesForACategory((Long)byId.keySet().toArray()[0]);
             } else {
                 Map<Long,String>byName= categoryService.findByName(category);
-                if(byName!=null && byName.size()>0)
+                if(byName!=null && !byName.isEmpty())
                     op = recipeService.getAllRecipesForACategory((Long)byName.keySet().toArray()[0]);
             }
         }

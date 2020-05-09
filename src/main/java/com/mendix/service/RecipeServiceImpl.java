@@ -7,6 +7,7 @@ import com.mendix.model.Categories;
 import com.mendix.model.Category;
 import com.mendix.model.Recipe;
 import com.mendix.model.Recipes;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +99,7 @@ public class RecipeServiceImpl implements RecipeService {
             return true;
         }
         catch (Exception e){
-            e.printStackTrace();
+            LOGGER.error("RecipeServiceImpl saveRecipe- {} exception - "+ ExceptionUtils.getStackTrace(e));
             LOGGER.error("RecipeServiceImpl saveRecipe- {} exception - "+e.getMessage());
         }
 
@@ -138,12 +139,12 @@ public class RecipeServiceImpl implements RecipeService {
                     obj.setId(recipe.getId() + "");
                     recipesList.add(obj);
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ ExceptionUtils.getStackTrace(ex));
                     LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ex.getMessage());
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ ExceptionUtils.getStackTrace(e));
             LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+e.getMessage());
         }
 

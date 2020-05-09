@@ -21,7 +21,7 @@ public class CategoryDaoImpl implements  CategoryDao {
     @Override
     public Category findByName(String categoryName) {
         List<Category> categories=  categoryRepository.findByCategoryName(categoryName);
-        if(categories!=null && categories.size()>0)
+        if(categories!=null && !categories.isEmpty())
         return categories.get(0);
         else
             return null;
