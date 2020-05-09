@@ -23,9 +23,18 @@ public class RecipesRestControllerTest {
     @Value("${server.port}")
     int port;
     @Test
-    public void getDataTest() {
-        get("/api/tdd/responseData").then().assertThat().body("data", equalTo("responseData"));
+    public void checkEmptyDataResponseCodeForCategory() {
+        get("/services/recipe/filter/all").then().assertThat().statusCode(204);
+
     }
+
+    @Test
+    public void checkEmptyDataResponseCodeForRecipe() {
+        get("/services/recipe/test").then().assertThat().statusCode(204);
+
+    }
+
+
     @Before
     public void setBaseUri () {
         RestAssured.port = port;

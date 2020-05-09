@@ -6,8 +6,6 @@ import com.mendix.model.Recipe;
 import com.mendix.model.Recipes;
 import com.mendix.service.CategoryService;
 import com.mendix.service.RecipeService;
-import io.swagger.models.auth.In;
-import javafx.scene.transform.Scale;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
