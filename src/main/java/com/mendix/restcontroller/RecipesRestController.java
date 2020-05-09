@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -112,8 +113,8 @@ public class RecipesRestController {
     }
 
 
-    @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
-    public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category)
+    @RequestMapping(path = "/services/recipe/{category}/{id}", method= RequestMethod.GET)
+    public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category,@PathVariable("id") String recipeId)
     {
         LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
         Recipes op =null;
@@ -131,7 +132,45 @@ public class RecipesRestController {
                     op = recipeService.getAllRecipesForACategory((Long)byName.keySet().toArray()[0]);
             }
         }
+
         if(op!=null){
+            if(NumberUtils.isCreatable(recipeId)){
+                List<Recipe> opRecipes = op.getRecipes();
+
+                op.setRecipes(opRecipes.stream().filter(or->or.getId().equals(recipeId)).collect(Collectors.toList()));
+            }
+            LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+            return new ResponseEntity<>(op,HttpStatus.OK);
+        }
+        else{
+            LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+
+    @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
+    public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category)
+    {
+        LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
+        Recipes op =null;
+
+        if("all".equals(category))
+            op = recipeService.getAllRecipe();
+        else {
+            if (NumberUtils.isCreatable(category)) {
+                Map<Long,String>byId = categoryService.findById(category);
+                if(byId!=null && byId.size()>0)
+                    op = recipeService.getAllRecipesForACategory((Long)byId.keySet().toArray()[0]);
+            } else {
+                Map<Long,String>byName= categoryService.findByName(category);
+                if(byName!=null && byName.size()>0)
+                    op = recipeService.getAllRecipesForACategory((Long)byName.keySet().toArray()[0]);
+            }
+        }
+
+        if(op!=null){
+
             LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
             return new ResponseEntity<>(op,HttpStatus.OK);
         }
