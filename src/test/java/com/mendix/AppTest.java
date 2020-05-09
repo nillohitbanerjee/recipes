@@ -1,4 +1,4 @@
-package com.mendix.app;
+package com.mendix;
 
 import static org.junit.Assert.assertTrue;
 
