@@ -183,6 +183,61 @@
         "deprecated": false
       }
     },
+    "/services/recipe/pageNo/{pageNo}/pageSize/{pageSize}": {
+      "get": {
+        "tags": [
+          "recipes-rest-controller"
+        ],
+        "summary": "Get all Recipes as per page no and page size",
+        "operationId": "getRecipesAsPerPageUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "page number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "page size",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "204": {
+            "description": "No content is present",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "The resource you were trying to reach is not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/services/recipe/{category}": {
       "get": {
         "tags": [
