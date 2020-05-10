@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class  CategoryServiceImpl implements CategoryService {
 
     private static final Logger LOGGER =  LoggerFactory.getLogger(CategoryServiceImpl.class);
     @Autowired

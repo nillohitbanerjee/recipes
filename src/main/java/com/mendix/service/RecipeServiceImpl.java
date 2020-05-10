@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -137,6 +138,17 @@ public class RecipeServiceImpl implements RecipeService {
                     ObjectMapper mapper = new ObjectMapper();
                     Recipe obj = mapper.readValue(recipe.getRecipeJson(), Recipe.class);
                     obj.setId(recipe.getId() + "");
+
+                    Categories savedCategories= obj.getHead().getCategories();
+
+                    List<Category> savedCat = savedCategories.getCat();
+
+                    List<Category> convertCat = savedCat.stream().map(category -> {
+                        Long tempId =categoryDao.findByName(category.getCategoryName()).getId();
+                        category.setId(tempId.intValue());
+                        return category;}).collect(Collectors.toList());
+                    savedCategories.setResults(convertCat.size());
+                    savedCategories.setCat(convertCat);
                     recipesList.add(obj);
                 } catch (Exception ex) {
                     LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ ExceptionUtils.getStackTrace(ex));

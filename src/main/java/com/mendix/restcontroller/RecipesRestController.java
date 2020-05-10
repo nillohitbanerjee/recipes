@@ -6,6 +6,10 @@ import com.mendix.model.Recipe;
 import com.mendix.model.Recipes;
 import com.mendix.service.CategoryService;
 import com.mendix.service.RecipeService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +35,16 @@ public class RecipesRestController {
     @Autowired
     RecipeService recipeService;
 
+
+    @ApiOperation(value = "Get all categories of Recipes", response = Categories.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved"),
+            @ApiResponse(code = 204, message = "No content is present"),
+            @ApiResponse(code = 500, message = "Internal error"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @RequestMapping(path = "/services/recipe/filter/{category}", method= RequestMethod.GET)
-    public ResponseEntity<Categories> getData(@PathVariable("category") String category)
+    public ResponseEntity<Categories> getData(@ApiParam(value = "all/id of a category /name of a category", required = true)@PathVariable("category") String category)
     {
         LOGGER.debug("RecipesRestController getData- {} call started with input:-"+category);
         Map<Long,String> op =null;
@@ -67,8 +79,15 @@ public class RecipesRestController {
         }
     }
 
+    @ApiOperation(value = "Save a new category")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully created"),
+            @ApiResponse(code = 409, message = "Duplicate entry"),
+            @ApiResponse(code = 500, message = "Internal error"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @RequestMapping(path = "/services/recipe/category", method= RequestMethod.POST)
-    public ResponseEntity<?> saveData(@RequestBody String category)
+    public ResponseEntity<?> saveData(@ApiParam(value = "name of a category as a stating value", required = true)@RequestBody String category)
     {
         LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+category);
         if(!StringUtils.isEmpty(category)) {
@@ -89,8 +108,16 @@ public class RecipesRestController {
     }
 
 
+    @ApiOperation(value = "Save a new Recipe")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully created"),
+            @ApiResponse(code = 409, message = "Duplicate entry"),
+            @ApiResponse(code = 500, message = "Internal error"),
+            @ApiResponse(code = 400, message = "Json structure is right but value provided is wrong, Please check whether provided  value of category is already saved"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @RequestMapping(path = "/services/recipe/add", method= RequestMethod.PUT)
-    public ResponseEntity<?> addRecipe(@RequestBody Recipe recipe)
+    public ResponseEntity<?> addRecipe(@ApiParam(value = "Recipe object to store value", required = true)@RequestBody Recipe recipe)
     {
         LOGGER.debug("RecipesRestController addRecipe- {} call started with input :-"+recipe.toString());
         if(recipeService.validateRecipeRequest(recipe)) {
@@ -111,8 +138,16 @@ public class RecipesRestController {
     }
 
 
+    @ApiOperation(value = "Get a Recipe with a specific category and id", response = Categories.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved"),
+            @ApiResponse(code = 204, message = "No content is present"),
+            @ApiResponse(code = 500, message = "Internal error"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @RequestMapping(path = "/services/recipe/{category}/{id}", method= RequestMethod.GET)
-    public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category,@PathVariable("id") String recipeId)
+    public ResponseEntity<Recipes> getRecipes(@ApiParam(value = "Name of a category as a stating value", required = true) @PathVariable("category") String category
+            ,@ApiParam(value = "Id of a recipe", required = true) @PathVariable("id") String recipeId)
     {
         LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
         Recipes op =null;
@@ -132,13 +167,27 @@ public class RecipesRestController {
         }
 
         if(op!=null){
-            if(NumberUtils.isCreatable(recipeId)){
-                List<Recipe> opRecipes = op.getRecipes();
-
-                op.setRecipes(opRecipes.stream().filter(or->or.getId().equals(recipeId)).collect(Collectors.toList()));
+            if(op.getResults()!=null && op.getResults()==0){
+                LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
-            return new ResponseEntity<>(op,HttpStatus.OK);
+            else {
+                LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+
+                if (NumberUtils.isCreatable(recipeId)) {
+                    List<Recipe> opRecipes = op.getRecipes();
+
+                    op.setRecipes(opRecipes.stream().filter(or -> or.getId().equals(recipeId)).collect(Collectors.toList()));
+                    op.setResults(Long.valueOf(op.getRecipes().size()));
+                    LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+                    return new ResponseEntity<>(op, HttpStatus.OK);
+                }
+                else{
+                    LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+
+            }
         }
         else{
             LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
@@ -146,9 +195,15 @@ public class RecipesRestController {
         }
     }
 
-
+    @ApiOperation(value = "Get all Recipes", response = Categories.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved"),
+            @ApiResponse(code = 204, message = "No content is present"),
+            @ApiResponse(code = 500, message = "Internal error"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
-    public ResponseEntity<Recipes> getRecipes(@PathVariable("category") String category)
+    public ResponseEntity<Recipes> getRecipes(@ApiParam(value = "name of a category as a stating value", required = true)@PathVariable("category") String category)
     {
         LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
         Recipes op =null;
@@ -168,10 +223,16 @@ public class RecipesRestController {
         }
 
         if(op!=null){
-
-            LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
-            return new ResponseEntity<>(op,HttpStatus.OK);
+            if(op.getResults()!=null && op.getResults()==0){
+                LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            else {
+                LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+                return new ResponseEntity<>(op, HttpStatus.OK);
+            }
         }
+
         else{
             LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

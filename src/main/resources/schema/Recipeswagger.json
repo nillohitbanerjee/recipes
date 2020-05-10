@@ -1,109 +1,43 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a back end API  for Recipe app",
-    "version": "1.0.0",
-    "title": "Recipe",
-    "contact": {
-      "email": "nillohitbanerjee@gmail.com"
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "schemes": [
-    "http"
+  "host": "localhost:10090",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "recipes-rest-controller",
+      "description": "Recipes Rest Controller"
+    }
   ],
   "paths": {
-    "/services/recipe/filter/categories": {
-      "get": {
-        "tags": [
-          "Recipes"
-        ],
-        "summary": "List of categories",
-        "description": "List of recipy categories",
-        "operationId": "listOfCategories",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Categories"
-            }
-          },
-          "204": {
-            "description": "No categories found"
-          },
-          "500": {
-            "description": "Internal error occurred"
-          }
-        }
-      }
-    },
-    "/services/recipe/{category}": {
-      "get": {
-        "tags": [
-          "Recipes"
-        ],
-        "summary": "List of recipes",
-        "description": "list of recipes according to categories and page value",
-        "operationId": "findPetsByStatus",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "category",
-            "in": "path",
-            "description": "type of category of recipes or you can provide all",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "page",
-            "in": "formData",
-            "description": "pagination value",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Recipes"
-            }
-          },
-          "204": {
-            "description": "No categories found"
-          },
-          "500": {
-            "description": "Internal error occurred"
-          }
-        }
-      }
-    },
     "/services/recipe/add": {
       "put": {
         "tags": [
-          "Recipes"
+          "recipes-rest-controller"
         ],
-        "summary": "add new recipe",
-        "description": "",
-        "operationId": "updatePet",
+        "summary": "Save a new Recipe",
+        "operationId": "addRecipeUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "application/json"
+          "*/*"
         ],
         "parameters": [
           {
             "in": "body",
-            "name": "body",
-            "description": "Recipe object that needs to be added",
+            "name": "recipe",
+            "description": "Recipe object to store value",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Recipe"
@@ -111,74 +45,249 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
           "201": {
-            "description": "Recipe created"
+            "description": "Successfully created",
+            "schema": {
+              "type": "object"
+            }
           },
           "400": {
-            "description": "Wrong JSON object"
+            "description": "Json structure is right but value provided is wrong, Please check whether provided  value of category is already saved"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "The resource you were trying to reach is not found"
           },
           "409": {
-            "description": "Recipe duplicated"
+            "description": "Duplicate entry"
           },
           "500": {
-            "description": "Internal error occurred"
+            "description": "Internal error"
           }
-        }
+        },
+        "deprecated": false
+      }
+    },
+    "/services/recipe/category": {
+      "post": {
+        "tags": [
+          "recipes-rest-controller"
+        ],
+        "summary": "Save a new category",
+        "operationId": "saveDataUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "category",
+            "description": "name of a category as a stating value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Successfully created",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "The resource you were trying to reach is not found"
+          },
+          "409": {
+            "description": "Duplicate entry"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/services/recipe/filter/{category}": {
+      "get": {
+        "tags": [
+          "recipes-rest-controller"
+        ],
+        "summary": "Get all categories of Recipes",
+        "operationId": "getDataUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "all/id of a category /name of a category",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "204": {
+            "description": "No content is present",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "The resource you were trying to reach is not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/services/recipe/{category}": {
+      "get": {
+        "tags": [
+          "recipes-rest-controller"
+        ],
+        "summary": "Get all Recipes",
+        "operationId": "getRecipesUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "name of a category as a stating value",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "204": {
+            "description": "No content is present",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "The resource you were trying to reach is not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/services/recipe/{category}/{id}": {
+      "get": {
+        "tags": [
+          "recipes-rest-controller"
+        ],
+        "summary": "Get a Recipe with a specific category and id",
+        "operationId": "getRecipesUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "Name of a category as a stating value",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of a recipe",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "204": {
+            "description": "No content is present",
+            "schema": {
+              "$ref": "#/definitions/Categories"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "The resource you were trying to reach is not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "deprecated": false
       }
     }
   },
   "definitions": {
-    "Category": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "categoryName": {
-          "type": "string"
-        }
-      },
-      "xml": {
-        "name": "Category"
-      }
-    },
-    "Categories": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Category"
-          }
-        }
-      },
-      "xml": {
-        "name": "Categories"
-      }
-    },
-    "RecipeHead": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "categories": {
-          "$ref": "#/definitions/Categories"
-        },
-        "yield": {
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "xml": {
-        "name": "RecipeHead"
-      }
-    },
     "Amount": {
       "type": "object",
       "properties": {
@@ -189,9 +298,45 @@
           "type": "string"
         }
       },
-      "xml": {
-        "name": "Amount"
-      }
+      "title": "Amount"
+    },
+    "Categories": {
+      "type": "object",
+      "properties": {
+        "cat": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Category"
+          }
+        },
+        "results": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Categories"
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "categoryName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Category"
+    },
+    "Directions": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "type": "string"
+        }
+      },
+      "title": "Directions"
     },
     "Ingredient": {
       "type": "object",
@@ -203,9 +348,7 @@
           "type": "string"
         }
       },
-      "xml": {
-        "name": "Ingredient"
-      }
+      "title": "Ingredient"
     },
     "IngredientDiv": {
       "type": "object",
@@ -220,9 +363,7 @@
           "type": "string"
         }
       },
-      "xml": {
-        "name": "IngredientDiv"
-      }
+      "title": "IngredientDiv"
     },
     "Ingredients": {
       "type": "object",
@@ -234,20 +375,7 @@
           }
         }
       },
-      "xml": {
-        "name": "Ingredients"
-      }
-    },
-    "Directions": {
-      "type": "object",
-      "properties": {
-        "step": {
-          "type": "string"
-        }
-      },
-      "xml": {
-        "name": "Directions"
-      }
+      "title": "Ingredients"
     },
     "Recipe": {
       "type": "object",
@@ -258,17 +386,40 @@
         "head": {
           "$ref": "#/definitions/RecipeHead"
         },
+        "id": {
+          "type": "string"
+        },
         "ingredients": {
           "$ref": "#/definitions/Ingredients"
         }
       },
-      "xml": {
-        "name": "Recipe"
-      }
+      "title": "Recipe"
+    },
+    "RecipeHead": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "$ref": "#/definitions/Categories"
+        },
+        "title": {
+          "type": "string"
+        },
+        "yield": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RecipeHead"
     },
     "Recipes": {
       "type": "object",
       "properties": {
+        "recipes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipe"
+          }
+        },
         "results": {
           "type": "integer",
           "format": "int64"
@@ -276,17 +427,9 @@
         "total": {
           "type": "integer",
           "format": "int64"
-        },
-        "recipes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Recipe"
-          }
         }
       },
-      "xml": {
-        "name": "Recipes"
-      }
+      "title": "Recipes"
     }
   }
 }
