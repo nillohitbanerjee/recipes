@@ -3,8 +3,6 @@ package com.mendix.service;
 import com.mendix.model.Recipe;
 import com.mendix.model.Recipes;
 
-import java.util.List;
-
 public interface RecipeService {
 
     boolean validateRecipeRequest(Recipe recipe);
