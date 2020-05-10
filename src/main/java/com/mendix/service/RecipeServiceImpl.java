@@ -31,15 +31,15 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public boolean validateRecipeRequest(Recipe recipe) {
-        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call started with input:-"+recipe);
+        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call started with input:-",recipe);
         if(recipe!=null){
-            LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} recipe not null");
+            LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {}","recipe not null");
             if(recipe.getHead()!=null && recipe.getDirections()!=null && recipe.getIngredients()!=null){
-                LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} recipe inputs are not null");
+                LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {}","recipe inputs are not null");
                 Categories categories = recipe.getHead().getCategories();
 
                 if(categories!=null && categories.getCat()!=null && categories.getCat().size()>0){
-                    LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} categories inputs are not null");
+                    LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {}","categories inputs are not null");
                     List<Category> categoryInputList = categories.getCat();
 
                     List<com.mendix.dbModel.Category> categoryDBList = new ArrayList<>();
@@ -53,31 +53,31 @@ public class RecipeServiceImpl implements RecipeService {
 
 
                     if(categoryInputList.size()==categoryDBList.size()){
-                        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} validation success");
+                        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {}","validation success");
                         return true;
                     }
                 }
 
             }
         }
-        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with validation failure");
+        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with","validation failure");
         return false;
     }
 
     @Override
     public boolean isDelicateRecipe(Recipe recipe) {
-        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with duplicate");
+        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with "," duplicate");
         if(recipeDao.getRecipeByName(recipe.getHead().getTitle())!=null){
-            LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with duplicate");
+            LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with "," duplicate");
             return true;
         }
-        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with not duplicate");
+        LOGGER.debug("RecipeServiceImpl validateRecipeRequest- {} call end with "," not duplicate");
         return false;
     }
 
     @Override
     public boolean saveRecipe(Recipe recipe) {
-        LOGGER.debug("RecipeServiceImpl saveRecipe- {} call started with input:-"+recipe);
+        LOGGER.debug("RecipeServiceImpl saveRecipe- {} call started with input:-",recipe);
         try {
             Categories categories = recipe.getHead().getCategories();
             List<Category> categoryInputList = categories.getCat();
@@ -96,42 +96,42 @@ public class RecipeServiceImpl implements RecipeService {
             newRecipe.setRecipeJson(jsonString);
 
             recipeDao.saveRecipe(newRecipe);
-            LOGGER.debug("RecipeServiceImpl saveRecipe- {} save success");
+            LOGGER.debug("RecipeServiceImpl saveRecipe- {} " ,"save success");
             return true;
         }
         catch (Exception e){
-            LOGGER.error("RecipeServiceImpl saveRecipe- {} exception - "+ ExceptionUtils.getStackTrace(e));
-            LOGGER.error("RecipeServiceImpl saveRecipe- {} exception - "+e.getMessage());
+            LOGGER.error("RecipeServiceImpl saveRecipe- {} exception - ", ExceptionUtils.getStackTrace(e));
+            LOGGER.error("RecipeServiceImpl saveRecipe- {} exception - " , e.getMessage());
         }
 
-        LOGGER.debug("RecipeServiceImpl saveRecipe- {} save failed");
+        LOGGER.debug("RecipeServiceImpl saveRecipe- {} ","save failed");
 
         return false;
     }
 
     @Override
     public Recipes getAllRecipe() {
-        LOGGER.debug("RecipeServiceImpl getAllRecipe- {} call started");
+        LOGGER.debug("RecipeServiceImpl getAllRecipe- {}"," call started");
         Recipes recipes = new Recipes();
         List<Recipe> recipesList = new ArrayList<>();
 
         prepapreRecipes(recipes, recipesList, recipeDao.getAllRecipes());
-        LOGGER.debug("RecipeServiceImpl getAllRecipe- {} call completed");
+        LOGGER.debug("RecipeServiceImpl getAllRecipe- {}"," call completed");
         return recipes;
     }
 
     @Override
     public Recipes getAllRecipesForACategory(Long categoryId) {
-        LOGGER.debug("RecipeServiceImpl getAllRecipesForACategory- {} call started with input:-"+categoryId);
+        LOGGER.debug("RecipeServiceImpl getAllRecipesForACategory- {} call started with input:-",categoryId);
         Recipes recipes = new Recipes();
         List<Recipe> recipesList = new ArrayList<>();
         prepapreRecipes(recipes, recipesList, recipeDao.findAllRecipeForACategory(categoryId));
-        LOGGER.debug("RecipeServiceImpl getAllRecipesForACategory- {} call completed");
+        LOGGER.debug("RecipeServiceImpl getAllRecipesForACategory- {} ","call completed");
         return recipes;
     }
 
     private void prepapreRecipes(Recipes recipes, List<Recipe> recipesList, Iterable<com.mendix.dbModel.Recipe> allRecipeForACategory) {
-        LOGGER.debug("RecipeServiceImpl prepapreRecipes- {} call started");
+        LOGGER.debug("RecipeServiceImpl prepapreRecipes- {} ","call started");
         try {
             allRecipeForACategory.forEach(recipe -> {
                 try {
@@ -151,18 +151,18 @@ public class RecipeServiceImpl implements RecipeService {
                     savedCategories.setCat(convertCat);
                     recipesList.add(obj);
                 } catch (Exception ex) {
-                    LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ ExceptionUtils.getStackTrace(ex));
-                    LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ex.getMessage());
+                    LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - ", ExceptionUtils.getStackTrace(ex));
+                    LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - ",ex.getMessage());
                 }
             });
         } catch (Exception e) {
-            LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+ ExceptionUtils.getStackTrace(e));
-            LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - "+e.getMessage());
+            LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - ", ExceptionUtils.getStackTrace(e));
+            LOGGER.error("RecipeServiceImpl prepapreRecipes- {} exception - " , e.getMessage());
         }
 
         recipes.setRecipes(recipesList);
         recipes.setResults(Long.valueOf(recipesList.size()));
         recipes.setTotal(recipeDao.findCountForAllRecipe());
-        LOGGER.debug("RecipeServiceImpl prepapreRecipes- {} call started");
+        LOGGER.debug("RecipeServiceImpl prepapreRecipes- {} ", "call started");
     }
 }

@@ -46,7 +46,7 @@ public class RecipesRestController {
     @RequestMapping(path = "/services/recipe/filter/{category}", method= RequestMethod.GET)
     public ResponseEntity<Categories> getData(@ApiParam(value = "all/id of a category /name of a category", required = true)@PathVariable("category") String category)
     {
-        LOGGER.debug("RecipesRestController getData- {} call started with input:-"+category);
+        LOGGER.debug("RecipesRestController getData- {} call started with input:-" ,category);
         Map<Long,String> op =null;
         Categories categoryOP = new Categories();
         if("all".equals(category))
@@ -59,22 +59,22 @@ public class RecipesRestController {
             }
         }
         if(op!=null && !op.isEmpty()){
-            categoryOP.setResults(Integer.valueOf(op.size()));
+            categoryOP.setResults((op.size()));
             List<Category> cat = new ArrayList<>();
 
             op.forEach((k,v)->{
                 Category c = new Category();
-                c.setId(Integer.valueOf(k.intValue()));
+                c.setId((k.intValue()));
                 c.setCategoryName(v);
                 cat.add(c);
             });
 
             categoryOP.setCat(cat);
-            LOGGER.debug("RecipesRestController getData- {} call end with success");
+            LOGGER.debug("RecipesRestController getData- {} call end with -", "success");
             return new ResponseEntity<>(categoryOP,HttpStatus.OK);
         }
         else{
-            LOGGER.debug("RecipesRestController getData- {} call end with failure");
+            LOGGER.debug("RecipesRestController getData- {} call end with - ","failure");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -89,20 +89,20 @@ public class RecipesRestController {
     @RequestMapping(path = "/services/recipe/category", method= RequestMethod.POST)
     public ResponseEntity<?> saveData(@ApiParam(value = "name of a category as a stating value", required = true)@RequestBody String category)
     {
-        LOGGER.debug("RecipesRestController saveData- {} call started with input :-"+category);
+        LOGGER.debug("RecipesRestController saveData- {} call started with input :-" , category);
         if(!StringUtils.isEmpty(category)) {
             if(!categoryService.isDuplicateCategory(category)) {
                 categoryService.saveCategory(category);
-                LOGGER.debug("RecipesRestController saveData- {} call end with success and created");
+                LOGGER.debug("RecipesRestController saveData- {} call end with ", "success and created");
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             else{
-                LOGGER.debug("RecipesRestController saveData- {} call end with conflict");
+                LOGGER.debug("RecipesRestController saveData- {} call end with ","conflict");
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
         else {
-            LOGGER.debug("RecipesRestController saveData- {} call end with failure");
+            LOGGER.debug("RecipesRestController saveData- {} call end with"," failure");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -119,20 +119,20 @@ public class RecipesRestController {
     @RequestMapping(path = "/services/recipe/add", method= RequestMethod.PUT)
     public ResponseEntity<?> addRecipe(@ApiParam(value = "Recipe object to store value", required = true)@RequestBody Recipe recipe)
     {
-        LOGGER.debug("RecipesRestController addRecipe- {} call started with input :-"+recipe.toString());
+        LOGGER.debug("RecipesRestController addRecipe- {} call started with input :-", recipe);
         if(recipeService.validateRecipeRequest(recipe)) {
             if(!recipeService.isDelicateRecipe(recipe)) {
                 recipeService.saveRecipe(recipe);
-                LOGGER.debug("RecipesRestController addRecipe- {} call end with success and created");
+                LOGGER.debug("RecipesRestController addRecipe- {} call end with ", "success and created");
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             else{
-                LOGGER.debug("RecipesRestController addRecipe- {} call end with conflict");
+                LOGGER.debug("RecipesRestController addRecipe- {} call end with","conflict");
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
         else {
-            LOGGER.debug("RecipesRestController addRecipe- {} call end with failure");
+            LOGGER.debug("RecipesRestController addRecipe- {} call end with","failure");
             return new ResponseEntity<>("Json structure is right but value is wrong", HttpStatus.BAD_REQUEST);
         }
     }
@@ -149,7 +149,7 @@ public class RecipesRestController {
     public ResponseEntity<Recipes> getRecipes(@ApiParam(value = "Name of a category as a stating value", required = true) @PathVariable("category") String category
             ,@ApiParam(value = "Id of a recipe", required = true) @PathVariable("id") String recipeId)
     {
-        LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
+        LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" ,category);
         Recipes op =null;
 
         if("all".equals(category))
@@ -168,29 +168,33 @@ public class RecipesRestController {
 
         if(op!=null){
             if(op.getResults()!=null && op.getResults()==0){
-                LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+                LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             else {
-                LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+                LOGGER.debug("RecipesRestController getRecipes- {} call continue","result found");
 
                 if (NumberUtils.isCreatable(recipeId)) {
                     List<Recipe> opRecipes = op.getRecipes();
 
                     op.setRecipes(opRecipes.stream().filter(or -> or.getId().equals(recipeId)).collect(Collectors.toList()));
-                    op.setResults(Long.valueOf(op.getRecipes().size()));
-                    LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+                    op.setResults(new Long(op.getRecipes().size()));
+                    if(op.getResults()==0){
+                        LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
+                        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                    }
+                    LOGGER.debug("RecipesRestController getRecipes- {} call end","result found");
                     return new ResponseEntity<>(op, HttpStatus.OK);
                 }
                 else{
-                    LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+                    LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
                 }
 
             }
         }
         else{
-            LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+            LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -205,7 +209,7 @@ public class RecipesRestController {
     @RequestMapping(path = "/services/recipe/{category}", method= RequestMethod.GET)
     public ResponseEntity<Recipes> getRecipes(@ApiParam(value = "name of a category as a stating value", required = true)@PathVariable("category") String category)
     {
-        LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" +category);
+        LOGGER.debug("RecipesRestController getRecipes- {} call started with input:-" ,category);
         Recipes op =null;
 
         if("all".equals(category))
@@ -224,17 +228,17 @@ public class RecipesRestController {
 
         if(op!=null){
             if(op.getResults()!=null && op.getResults()==0){
-                LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+                LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             else {
-                LOGGER.debug("RecipesRestController getRecipes- {} call end result found");
+                LOGGER.debug("RecipesRestController getRecipes- {} call end","result found");
                 return new ResponseEntity<>(op, HttpStatus.OK);
             }
         }
 
         else{
-            LOGGER.debug("RecipesRestController getRecipes- {} call end result not found");
+            LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }

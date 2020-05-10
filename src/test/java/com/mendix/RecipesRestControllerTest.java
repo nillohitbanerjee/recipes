@@ -9,14 +9,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.put;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = App.class)
 @TestPropertySource(value={"classpath:application.properties"})
@@ -46,7 +44,11 @@ public class RecipesRestControllerTest {
                         body("cake").
                         when().
                         post("/services/recipe/category").then().assertThat().statusCode(201);
+
         get("/services/recipe/filter/1").then().assertThat().statusCode(200);
+
+        get("/services/recipe/filter/cake").then().assertThat().statusCode(200);
+
         given()
                 .contentType("application/json").
                 body("cake").
@@ -225,8 +227,13 @@ public class RecipesRestControllerTest {
                 put("/services/recipe/add").then().assertThat().statusCode(409);
 
         get("/services/recipe/cola").then().assertThat().statusCode(200);
+        get("/services/recipe/2").then().assertThat().statusCode(200);
+        get("/services/recipe/2/3").then().assertThat().statusCode(200);
         get("/services/recipe/all").then().assertThat().statusCode(200);
         get("/services/recipe/cola/3").then().assertThat().statusCode(200);
+        get("/services/recipe/xyz/3").then().assertThat().statusCode(204);
+        get("/services/recipe/cola/20").then().assertThat().statusCode(204);
+        get("/services/recipe/cola/abc").then().assertThat().statusCode(204);
 
     }
     @Before
