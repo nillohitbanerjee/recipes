@@ -154,8 +154,8 @@ public class RecipeServiceImpl implements RecipeService {
                     List<Category> savedCat = savedCategories.getCat();
 
                     List<Category> convertCat = savedCat.stream().map(category -> {
-                        Long tempId =categoryDao.findByName(category.getCategoryName()).getId();
-                        category.setId(tempId.intValue());
+                        long tempId =categoryDao.findByName(category.getCategoryName()).getId();
+                        category.setId(Integer.parseInt(tempId+""));
                         return category;}).collect(Collectors.toList());
                     savedCategories.setResults(convertCat.size());
                     savedCategories.setCat(convertCat);

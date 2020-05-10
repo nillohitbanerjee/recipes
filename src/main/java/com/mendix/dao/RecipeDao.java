@@ -14,5 +14,5 @@ public interface RecipeDao {
     long findCountForAllRecipeForACategory(long categoryId);
     long findCountForAllRecipe();
     Iterable<Recipe> getAllRecipes();
-    public List<Recipe> getAllRecipes(Integer pageNo, Integer pageSize);
+    List<Recipe> getAllRecipes(Integer pageNo, Integer pageSize);
 }

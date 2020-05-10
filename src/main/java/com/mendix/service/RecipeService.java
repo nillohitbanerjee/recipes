@@ -10,5 +10,5 @@ public interface RecipeService {
     boolean saveRecipe(Recipe recipe);
     Recipes getAllRecipe();
     Recipes getAllRecipesForACategory(Long categoryId);
-    public Recipes getAllRecipes(Integer pageNo, Integer pageSize);
+    Recipes getAllRecipes(Integer pageNo, Integer pageSize);
 }
