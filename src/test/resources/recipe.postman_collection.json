@@ -506,6 +506,29 @@
 					"response": []
 				},
 				{
+					"name": "get all recipes of specific category and Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "893dd901-5779-4999-a168-4bbc69d7b959",
+								"exec": [
+									"pm.test(\"get recipy and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/maindish/9"
+					},
+					"response": []
+				},
+				{
 					"name": "no recipes found",
 					"event": [
 						{
