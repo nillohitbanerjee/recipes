@@ -529,6 +529,52 @@
 					"response": []
 				},
 				{
+					"name": "get all recipes of specific page number =0 and size =2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "669948af-1ec5-4d10-9e64-35763c961f73",
+								"exec": [
+									"pm.test(\"get recipy and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/pageNo/1/pageSize/2"
+					},
+					"response": []
+				},
+				{
+					"name": "get all recipes of specific page number =1 and size =2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "577d1604-25f5-4399-9014-af79aa46d60b",
+								"exec": [
+									"pm.test(\"get recipy and reponse code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{backendUrl}}/services/recipe/pageNo/1/pageSize/2"
+					},
+					"response": []
+				},
+				{
 					"name": "no recipes found",
 					"event": [
 						{

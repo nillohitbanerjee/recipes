@@ -130,6 +130,16 @@ public class RecipeServiceImpl implements RecipeService {
         return recipes;
     }
 
+    @Override
+    public Recipes getAllRecipes(Integer pageNo, Integer pageSize) {
+        LOGGER.debug("RecipeServiceImpl getAllRecipes- {} ","call started");
+        Recipes recipes = new Recipes();
+        List<Recipe> recipesList = new ArrayList<>();
+        prepapreRecipes(recipes, recipesList,recipeDao.getAllRecipes(pageNo,pageSize));
+        LOGGER.debug("RecipeServiceImpl getAllRecipes- {} ","call ended");
+        return recipes;
+    }
+
     private void prepapreRecipes(Recipes recipes, List<Recipe> recipesList, Iterable<com.mendix.dbModel.Recipe> allRecipeForACategory) {
         LOGGER.debug("RecipeServiceImpl prepapreRecipes- {} ","call started");
         try {

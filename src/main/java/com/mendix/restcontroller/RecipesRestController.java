@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.models.auth.In;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -239,6 +240,44 @@ public class RecipesRestController {
 
         else{
             LOGGER.debug("RecipesRestController getRecipes- {} call end","result not found");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @ApiOperation(value = "Get all Recipes as per page no and page size", response = Categories.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved"),
+            @ApiResponse(code = 204, message = "No content is present"),
+            @ApiResponse(code = 500, message = "Internal error"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
+    @RequestMapping(path = "/services/recipe/pageNo/{pageNo}/pageSize/{pageSize}", method= RequestMethod.GET)
+    public ResponseEntity<Recipes> getRecipesAsPerPage(@ApiParam(value = "page number", required = true)@PathVariable("pageNo") String pageNo,
+                                                       @ApiParam(value = "page size", required = true)@PathVariable("pageSize") String pageSize)
+    {
+        LOGGER.debug("RecipesRestController getRecipesAsPerPage- {} call started with input:-" ,"Page no - "+ pageNo +"  Page size - "+pageSize);
+        Recipes op =null;
+
+
+            if (NumberUtils.isCreatable(pageNo) && NumberUtils.isCreatable(pageSize)) {
+
+                    op = recipeService.getAllRecipes(Integer.parseInt(pageNo),Integer.parseInt(pageSize));
+            }
+
+
+        if(op!=null){
+            if(op.getResults()!=null && op.getResults()==0){
+                LOGGER.debug("RecipesRestController getRecipesAsPerPage- {} call end","result not found");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            else {
+                LOGGER.debug("RecipesRestController getRecipesAsPerPage- {} call end","result found");
+                return new ResponseEntity<>(op, HttpStatus.OK);
+            }
+        }
+
+        else{
+            LOGGER.debug("RecipesRestController getRecipesAsPerPage- {} call end","result not found");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }

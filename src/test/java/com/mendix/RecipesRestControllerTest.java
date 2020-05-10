@@ -234,7 +234,8 @@ public class RecipesRestControllerTest {
         get("/services/recipe/xyz/3").then().assertThat().statusCode(204);
         get("/services/recipe/cola/20").then().assertThat().statusCode(204);
         get("/services/recipe/cola/abc").then().assertThat().statusCode(204);
-
+        get("/services/recipe/pageNo/0/pageSize/2").then().assertThat().statusCode(200);
+        get("/services/recipe/pageNo/1/pageSize/2").then().assertThat().statusCode(204);
     }
     @Before
     public void setBaseUri () {
