@@ -16,9 +16,13 @@ This is a web site of recipes . Where you user can see all the recipes present i
 * Story 4 - 	User can visit a web site for recipes listing me available recipes on the landing page
 	
 ## Technologies
-Project is created with:
+Project is being created with below technolories:
 * Java 8
 * Spring boot 2.1.6.RELEASE
+    * Spring boot
+    * Spring DI
+    * Spring JPA
+* H2
 * Mendix studio pro 8.9.0
 * Docker
 * Junit test coverage with maven and jacoco-maven-plugin 0.8.2
@@ -33,6 +37,7 @@ $ run mvn clean install (form project home)
 $ to have docker build  run mvn package docker:build
 $ to get junit test coverage report go to \target\site\jacoco\index.html
 $ if you want to run the project from intelij or eclipse go to com.mendix.App.java and run as a java program
+$ All the data preparetions are done via post man 
 $ after having this java project up and running user should use post man to create prepare backend data and run post man test scripts
 $ You need to import recipes\src\test\resources\recipe.postman_collection.json and then run all the the test scripts
 ```
