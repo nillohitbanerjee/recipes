@@ -16,7 +16,7 @@ This is a web site of recipes . Where you user can see all the recipes present i
 * Story 4 - 	User can visit a web site for recipes listing me available recipes on the landing page
 	
 ## Technologies
-Project is being created with below technolories:
+Project is being created with below technologies:
 * Java 8
 * Spring boot 2.1.6.RELEASE
     * Spring boot
